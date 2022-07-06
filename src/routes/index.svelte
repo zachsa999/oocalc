@@ -6,6 +6,9 @@
 
 	let input = 0.0;
 	let enumeration = 0.0;
+	export function roundxx(x) {
+		return Math.round(x * 100) * 0.01;
+	}
 </script>
 
 <div class="wrapper">
@@ -28,10 +31,12 @@
 	<code>
 		<div class="result">
 			<p>Gross Profit:${input}</p>
-			<p>Office Charges 1%: ${input * office_rate * 0.01}</p>
-			<p>Trailer Lease {trailer_rate}%: ${input * trailer_rate * 0.01}</p>
+			<p>Office Charges 1%: ${roundxx(input * office_rate * 0.01)}</p>
+			<p>Trailer Lease {trailer_rate}%: ${roundxx(input * trailer_rate * 0.01)}</p>
 			<p>
-				Total Enumeration {total_rate}% ({100 - total_rate}% of total): ${input * total_rate * 0.01}
+				Total Enumeration {total_rate}% ({100 - total_rate}% of total): ${roundxx(
+					input * (100 - total_rate) * 0.01
+				)}
 			</p>
 		</div>
 	</code>
