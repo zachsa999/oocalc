@@ -1,13 +1,16 @@
 <script>
+	// throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	let total_rate = 18;
-	let office_rate = 1;
+	let office_rate = 8;
 
 	$: trailer_rate = total_rate - office_rate;
 
 	let input = 0.0;
 	let enumeration = 0.0;
-	export function roundxx(x) {
-		return Math.round(x * 100) * 0.01;
+	function roundx(x) {
+		const y = Math.round(x * 100 * 0.01);
+		return y;
 	}
 </script>
 
@@ -31,12 +34,13 @@
 	<code>
 		<div class="result">
 			<p>Gross Profit:${input}</p>
-			<p>Office Charges 1%: ${roundxx(input * office_rate * 0.01)}</p>
-			<p>Trailer Lease {trailer_rate}%: ${roundxx(input * trailer_rate * 0.01)}</p>
+			<p>Office Charges 1%: ${input * office_rate * 0.01}</p>
+			<p>Trailer Lease {trailer_rate}%: ${input * trailer_rate * 0.01}</p>
 			<p>
-				Total Enumeration {total_rate}% ({100 - total_rate}% of total): ${roundxx(
-					input * (100 - total_rate) * 0.01
-				)}
+				Total Enumeration
+				{total_rate}% (
+				{100 - total_rate}% of total): $
+				{input * (100 - total_rate) * 0.01}
 			</p>
 		</div>
 	</code>

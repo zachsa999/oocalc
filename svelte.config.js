@@ -8,10 +8,6 @@ const config = {
 			// default options are shown. On some platforms
 			// these options are set automatically — see below
 		}),
-		prerender: {
-			// This can be false if you're using a fallback (i.e. SPA mode)
-			default: true
-		}
 	}
 };
 
