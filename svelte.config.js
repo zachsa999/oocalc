@@ -5,9 +5,13 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			fallback: '200.html'
+			fallback: '200.html',
+			pages: 'build',
+			assets: 'build',
+			fallback: null,
+			precompress: false,
+			strict: true
 		}),
-		// prerender: { entries: [] }
 	},
 
 };
