@@ -1,6 +1,3 @@
-<script>
-</script>
-
 <nav>
 	<a href="/forms">Forms</a>
 	<a href="/color">Color</a>
