@@ -8,7 +8,6 @@ const config = {
 			fallback: '200.html',
 			pages: 'build',
 			assets: 'build',
-			fallback: null,
 			precompress: false,
 			strict: true
 		}),
