@@ -1,6 +1,4 @@
 <script>
-	export const ssr = false;
-	export const prerender = true;
 </script>
 
 <nav>
