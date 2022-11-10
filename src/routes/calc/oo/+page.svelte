@@ -83,9 +83,8 @@
 			Office Charges 1%: ${input * office_rate * 0.01}<br />
 			Trailer Lease {trailer_rate}%: ${input * trailer_rate * 0.01}<br />
 			{#if deduction.exists}
-				{#if deduction.type == "percent"}
+				{#if deduction.type == 'percent'}
 					{deduction.label}: {deduction.value}%
-
 				{/if}
 			{/if}
 			<strong>Total Deductions:</strong><br />
