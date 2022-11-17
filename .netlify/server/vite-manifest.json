@@ -1,0 +1,194 @@
+{
+  ".svelte-kit/build/index.js": {
+    "file": "index.js",
+    "src": ".svelte-kit/build/index.js",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_env-public.js"
+    ],
+    "dynamicImports": [
+      "src/hooks.server.js"
+    ]
+  },
+  "src/routes/+layout.svelte": {
+    "file": "entries/pages/_layout.svelte.js",
+    "src": "src/routes/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_supabaseClient.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout-38268018.css"
+    ]
+  },
+  "src/routes/+layout.js": {
+    "file": "entries/pages/_layout.js",
+    "src": "src/routes/+layout.js",
+    "isEntry": true
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_stores.js"
+    ]
+  },
+  "src/routes/calc/+layout.svelte": {
+    "file": "entries/pages/calc/_layout.svelte.js",
+    "src": "src/routes/calc/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout-22f9b629.css"
+    ]
+  },
+  "src/routes/forms/+layout.svelte": {
+    "file": "entries/pages/forms/_layout.svelte.js",
+    "src": "src/routes/forms/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_layout-f5eebbd1.css"
+    ]
+  },
+  "src/routes/labs/+layout.svelte": {
+    "file": "entries/pages/labs/_layout.svelte.js",
+    "src": "src/routes/labs/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/labs/jslabs/+layout.svelte": {
+    "file": "entries/pages/labs/jslabs/_layout.svelte.js",
+    "src": "src/routes/labs/jslabs/+layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/+page.svelte": {
+    "file": "entries/pages/_page.svelte.js",
+    "src": "src/routes/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js",
+      "_stores.js",
+      "_supabaseClient.js"
+    ]
+  },
+  "src/routes/+page.js": {
+    "file": "entries/pages/_page.js",
+    "src": "src/routes/+page.js",
+    "isEntry": true
+  },
+  "src/routes/calc/+page.svelte": {
+    "file": "entries/pages/calc/_page.svelte.js",
+    "src": "src/routes/calc/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/calc/oo/+page.svelte": {
+    "file": "entries/pages/calc/oo/_page.svelte.js",
+    "src": "src/routes/calc/oo/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page-67769a66.css"
+    ]
+  },
+  "src/routes/forms/+page.svelte": {
+    "file": "entries/pages/forms/_page.svelte.js",
+    "src": "src/routes/forms/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/forms/contract/+page.svelte": {
+    "file": "entries/pages/forms/contract/_page.svelte.js",
+    "src": "src/routes/forms/contract/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/forms/maintenance-checklist/+page.svelte": {
+    "file": "entries/pages/forms/maintenance-checklist/_page.svelte.js",
+    "src": "src/routes/forms/maintenance-checklist/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/labs/+page.svelte": {
+    "file": "entries/pages/labs/_page.svelte.js",
+    "src": "src/routes/labs/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/labs/color/+page.svelte": {
+    "file": "entries/pages/labs/color/_page.svelte.js",
+    "src": "src/routes/labs/color/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/labs/jslabs/+page.svelte": {
+    "file": "entries/pages/labs/jslabs/_page.svelte.js",
+    "src": "src/routes/labs/jslabs/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/routes/labs/jslabs/float/+page.svelte": {
+    "file": "entries/pages/labs/jslabs/float/_page.svelte.js",
+    "src": "src/routes/labs/jslabs/float/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "_env-public.js": {
+    "file": "chunks/env-public.js"
+  },
+  "_index.js": {
+    "file": "chunks/index.js"
+  },
+  "_supabaseClient.js": {
+    "file": "chunks/supabaseClient.js",
+    "imports": [
+      "_env-public.js"
+    ]
+  },
+  "_stores.js": {
+    "file": "chunks/stores.js",
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "src/hooks.server.js": {
+    "file": "chunks/hooks.server.js",
+    "src": "src/hooks.server.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_supabaseClient.js"
+    ]
+  }
+}
