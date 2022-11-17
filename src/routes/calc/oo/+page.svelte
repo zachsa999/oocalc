@@ -1,30 +1,46 @@
 <script>
-	import { bind } from 'svelte/internal';
+	let gross_cents = 0;
+	let deductions = [];
+	let calculated_total = 0;
 
-	// throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
-	let total_rate = 18;
-	let office_rate = 8;
+	let total_rate_percent = 18.0;
+	let office_rate_percent = 8.0;
+	$: trailer_rate_percent = total_rate_percent - office_rate_percent;
 
-	let trailer_rate = total_rate - office_rate;
+	$: office_deduction_cents = gross_cents * office_rate_percent;
+	$: trailer_deduction_cents = gross_cents * trailer_rate_percent;
 
-	let input = 0.0;
+	$: net_cents = gross_cents - Math.round((total_rate_percent * gross_cents) / 100);
 
-	let deduction = {
-		label: 'New Deduction',
-		exists: false,
-		type: 'amount', // can be percent or amount
-		value: 0.0
-	};
-
-	function roundx(x) {
-		const y = Math.round(x * 100 * 0.01);
-		return y;
-	}
+	let temp_deduction_cents = 0;
+	let temp_label = '';
+	let deductions_length = 0;
 
 	async function copyText(input) {
 		var toCopy = document.getElementById(input);
 		var text = toCopy.innerText;
 		await navigator.clipboard.writeText(text);
+	}
+
+	function handleDeduction(id, label, value) {
+		deductions_length++;
+		deductions = [...deductions, { id, label, value }];
+	}
+
+	function removeDeduction(j) {
+		for (const deduction of deductions) {
+			if (j == deduction.id) {
+				deductions = deductions.filter((item) => item != deduction);
+			}
+		}
+	}
+
+	function applyDeductions(gross_cents, deductions) {
+		let total = 0;
+		for (const deduction of deductions) {
+			total = total + deduction.value;
+		}
+		calculated_total = net_cents - total;
 	}
 </script>
 
@@ -32,65 +48,66 @@
 	<h2>Input</h2>
 	<h3>Grossing</h3>
 	<div>
-		<p>Gross pay ($)</p>
-		<input type="number" bind:value={input} />
-		<p>Total Rate (%)</p>
-		<input type="number" min="16" max="18" bind:value={total_rate} />
-
-		<p>Office Rate (%) Deduction off total</p>
-		<input type="number" min="0.16" max="0.18" bind:value={office_rate} />
+		<label for="gross">Gross pay ¢</label>
+		<input id="gross" type="number" step="1" bind:value={gross_cents} />
+	</div>
+	<!-- <p>Total = {gross_cents}</p> -->
+	<div>
+		<label for="rate">Total Rate %</label>
+		<input id="rate" type="number" step="0.5" bind:value={total_rate_percent} />
 	</div>
 	<div>
-		<h3>Deductions</h3>
-		<label for="deductions">Add new deductions?</label>
-		<input type="checkbox" name="deductions" id="deductions" bind:checked={deduction.exists} />
-		<div>
-			{#if deduction.exists}
-				<div>
-					<input
-						type="radio"
-						id="amount"
-						name="amount"
-						value="amount"
-						bind:group={deduction.type}
-						checked
-					/>
-					<label for="amount">Amount</label>
-				</div>
-				<div>
-					<input
-						type="radio"
-						id="percentage"
-						name="percentage"
-						value="percentage"
-						bind:group={deduction.type}
-					/>
-					<label for="percentage">Percentage</label>
-				</div>
-				<input type="number" bind:value={deduction.value} />
-			{/if}
-		</div>
+		<label for="office_rate">Office Rate % Deduction off total</label>
+		<input id="office_rate" type="number" step="0.5" bind:value={office_rate_percent} />
 	</div>
+
+	<div>
+		<h3>Deductions</h3>
+		<p>new deductions</p>
+		<div class="flex">
+			<label for="dedtext">Deduction Name</label>
+			<input id="dedtext" type="text" placeholder="Insurance etc." bind:value={temp_label} />
+		</div>
+		<div>
+			<label for="dedamount">Deduction amount ¢</label>
+			<input id="dedamount" type="number" step="0.01" min="0" bind:value={temp_deduction_cents} />
+		</div>
+		<div>
+			{#each deductions as { id, label, value }}
+				<div>
+					<label for="remove_deduction">Deduction {label}: ${value / 100}</label>
+					<button id="remove_deduction" on:click={removeDeduction(id)}> Remove </button>
+				</div>
+			{/each}
+		</div>
+		<button on:click={handleDeduction(deductions_length, temp_label, temp_deduction_cents)}>
+			Add Deduction: {temp_deduction_cents} ¢
+		</button>
+	</div>
+	<button on:click={applyDeductions(gross_cents, deductions)}>Calculate Total</button>
 </div>
 
 <h2>Output</h2>
+<p>Net Cents = {net_cents}</p>
 <div>
 	<div class="result wrapper" id="output" contentEditable="true">
 		<code>
-			<strong>Profits:</strong><br />
-			Gross Profit:${input}<br />
+			<strong>Gross:</strong><br />
+			Gross Profit:${gross_cents / 100}<br /><br />
 			<strong>Deductions:</strong><br />
-			Office Charges 1%: ${input * office_rate * 0.01}<br />
-			Trailer Lease {trailer_rate}%: ${input * trailer_rate * 0.01}<br />
-			{#if deduction.exists}
-				{#if deduction.type == 'percent'}
-					{deduction.label}: {deduction.value}%
+			Office Charges {office_rate_percent}%: ${office_deduction_cents / 100}<br />
+			Trailer Lease {trailer_rate_percent}%: ${trailer_deduction_cents / 100}<br />
+			{#each deductions as { id, label, value }}
+				{#if label != ''}
+					<strong>{label}:</strong>
+				{:else}
+					<strong>Deduction</strong>
 				{/if}
-			{/if}
-			<strong>Total Deductions:</strong><br />
-
+				${value / 100}<br />
+			{/each}
+			<strong>Total Deductions:</strong><br /><br />
 			<strong>Total Enumeration: </strong>
-			{total_rate}% ({100 - total_rate}% of total) : ${input * (100 - total_rate) * 0.01}
+			{total_rate_percent}% ${calculated_total / 100}
 		</code>
 	</div>
 	<button on:click={() => copyText('output')}>Copy</button>

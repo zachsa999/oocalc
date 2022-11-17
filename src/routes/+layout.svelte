@@ -19,7 +19,7 @@
 
 <nav>
 	<a href="/forms">Forms</a>
-	<a href="/color">Color</a>
+	<a href="/labs">Labs</a>
 	<a href="/calc">calc</a>
 </nav>
 <slot />
